@@ -43,6 +43,24 @@
 
       test.equals(helloWorldPattern.render(), '<div>Hello World From React!</div>')
       test.done();
+    },
+
+    'hello world react pattern renders with json data': function (test) {
+      test.expect(1);
+
+      var patternPath = path.resolve(
+        testPatternsPath,
+        '00-atoms',
+        '00-global',
+        '00-helloworld-withdata.jsx'
+      );
+
+      var patternLab = fakePatternLab();
+      var assembler = new pa();
+      var helloWorldFromJSON = assembler.process_pattern_iterative(patternPath, patternLab);
+
+      test.equals(helloWorldFromJSON.render(), '<div>Hello React From JSON!</div>');
+      test.done();
     }
   }
 })();
