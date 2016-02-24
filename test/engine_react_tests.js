@@ -26,7 +26,7 @@
   };
 
   exports['engine_react'] = {
-    'hello world react pattern renders': function (test) {
+    'single React component renders with default props': function (test) {
       test.expect(1);
 
       var patternPath = path.resolve(
@@ -45,7 +45,7 @@
       test.done();
     },
 
-    'hello world react pattern renders with json data': function (test) {
+    'single React component renders with json data': function (test) {
       test.expect(1);
 
       var patternPath = path.resolve(
@@ -60,6 +60,38 @@
       var helloWorldFromJSON = assembler.process_pattern_iterative(patternPath, patternLab);
 
       test.equals(helloWorldFromJSON.render(), '<div>Hello React From JSON!</div>');
+      test.done();
+    },
+
+    'nested React components should render with default props': function (test) {
+      var patternPath = path.resolve(
+        testPatternsPath,
+        '00-molecules',
+        '00-global',
+        '00-helloworld.jsx'
+      );
+
+      var patternLab = fakePatternLab();
+      var assembler = new pa();
+      var helloWorld = assembler.process_pattern_iterative(patternPath, patternLab);
+
+      test.equals(helloWorld.render(), '<div>Hello From Container Component!<div>Hello World From React!</div></div>');
+      test.done();
+    },
+
+    'nested React components should render with hydrated data': function (test) {
+      var patternPath = path.resolve(
+        testPatternsPath,
+        '00-molecules',
+        '00-global',
+        '00-hydrate-components-with-data.jsx'
+      );
+
+      var patternLab = fakePatternLab();
+      var assembler = new pa();
+      var helloWorld = assembler.process_pattern_iterative(patternPath, patternLab);
+
+      test.equals(helloWorld.render(), '<div>Container Component JSON<div>Stateless Component JSON</div></div>');
       test.done();
     }
   }
