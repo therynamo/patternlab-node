@@ -116,6 +116,9 @@
       //add the raw template to memory
       currentPattern.template = currentPattern.loadTemplate(file);
 
+      // add compiled template to memory
+      currentPattern.compiledTemplate = currentPattern.loadCompiledTemplate(file);
+
       //find any stylemodifiers that may be in the current pattern
       currentPattern.stylePartials = currentPattern.findPartialsWithStyleModifiers();
 

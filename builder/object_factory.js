@@ -51,7 +51,7 @@
     // render method on oPatterns; this acts as a proxy for the PatternEngine's
     // render function
     render: function (data, partials) {
-      return this.engine.renderPattern(this.extendedTemplate, data || this.jsonFileData, partials);
+      return this.engine.renderPattern(this.extendedTemplate || this.compiledTemplate, data || this.jsonFileData, partials);
     },
 
     registerPartial: function () {
@@ -66,26 +66,42 @@
       }
     },
 
+    loadCompiledTemplate: function (filePath) {
+      if(typeof(this.engine.loadCompiledTemplate) === 'function') {
+        return this.engine.loadCompiledTemplate(filePath);
+      }
+    },
+
     // the finders all delegate to the PatternEngine, which also encapsulates all
     // appropriate regexes
     findPartials: function () {
-      return this.engine.findPartials(this);
+      if (typeof this.engine.findPartials === 'function') {
+        return this.engine.findPartials(this);
+      }
     },
 
     findPartialsWithStyleModifiers: function () {
-      return this.engine.findPartialsWithStyleModifiers(this);
+      if (typeof this.engine.findPartialsWithStyleModifiers === 'function') {
+        return this.engine.findPartialsWithStyleModifiers(this);
+      }
     },
 
     findPartialsWithPatternParameters: function () {
-      return this.engine.findPartialsWithPatternParameters(this);
+      if (typeof this.engine.findPartialsWithPatternParameters === 'function') {
+        return this.engine.findPartialsWithPatternParameters(this);
+      }
     },
 
     findListItems: function () {
-      return this.engine.findListItems(this);
+      if (typeof this.engine.findListItems === 'function') {
+        return this.engine.findListItems(this);
+      }
     },
 
     findPartialKey: function (partialString) {
-      return this.engine.findPartialKey(partialString);
+      if (typeof this.engine.findPartialKey === 'function') {
+        return this.engine.findPartialKey(partialString);
+      }
     }
   };
 
