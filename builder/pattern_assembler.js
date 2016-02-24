@@ -114,7 +114,7 @@
       }
 
       //add the raw template to memory
-      currentPattern.template = fs.readFileSync(file, 'utf8');
+      currentPattern.template = currentPattern.loadTemplate(file);
 
       //find any stylemodifiers that may be in the current pattern
       currentPattern.stylePartials = currentPattern.findPartialsWithStyleModifiers();

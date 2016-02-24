@@ -60,6 +60,12 @@
       }
     },
 
+    loadTemplate: function(filePath) {
+      if(typeof this.engine.loadTemplate === 'function') {
+        return this.engine.loadTemplate(filePath);
+      }
+    },
+
     // the finders all delegate to the PatternEngine, which also encapsulates all
     // appropriate regexes
     findPartials: function () {

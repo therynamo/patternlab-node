@@ -12,6 +12,7 @@
   "use strict";
 
   var Handlebars = require('handlebars');
+  var fs = require('fs');
 
   var engine_handlebars = {
     engine: Handlebars,
@@ -41,6 +42,10 @@
 
     registerPartial: function (oPattern) {
       Handlebars.registerPartial(oPattern.key, oPattern.template);
+    },
+
+    loadTemplate: function loadTemplate(filePath) {
+      return fs.readFileSync(filePath, 'utf8');
     },
 
     // find and return any {{> template-name }} within pattern

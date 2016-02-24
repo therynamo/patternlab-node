@@ -13,6 +13,7 @@
 
   var Mustache = require('mustache');
   var utilMustache = require('./util_mustache');
+  var fs = require('fs');
 
   var engine_mustache = {
     engine: Mustache,
@@ -53,6 +54,11 @@
 
       return matches;
     },
+
+    loadTemplate: function loadTemplate(file) {
+      return fs.readFileSync(file, 'utf8');
+    },
+
     // find and return any {{> template-name }} within pattern
     findPartials: function findPartials(pattern) {
       var matches = this.partialsFinder(pattern, this.findPartialsRE);
